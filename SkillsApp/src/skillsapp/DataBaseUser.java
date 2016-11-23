@@ -14,7 +14,7 @@ import java.util.Date;
  * @author mhodes
  */
 @Entity
-@Table(name = "DBUSER")
+@Table(name = "DB_user")
 public class DataBaseUser implements Serializable {
 
     @Id

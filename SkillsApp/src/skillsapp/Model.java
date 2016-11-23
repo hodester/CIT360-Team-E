@@ -21,14 +21,14 @@ public class Model {
      */
     
     static void insertUser(DBAccount account) {
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(account);
         transaction.commit();
     }
     
     static void updateUser(DBAccount updateDB){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 	Query accountDB = session.createQuery("Select u from DBAccount as u where u.id = :uId");
 	accountDB.setParameter("uId", updateDB.getUserId());
@@ -37,14 +37,14 @@ public class Model {
     }
     
     static void deletUser(DBAccount account){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.delete(account);
         transaction.commit();
     }
     
     static DBAccount showUserByID(Integer account){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select u from DBAccount as u where u.id = :uId");
         accountDB.setParameter("uId", account);
@@ -54,7 +54,7 @@ public class Model {
     }
     
     static List<DBAccount> showAllUsers(){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select u from DBAccount as u");
         @SuppressWarnings("unchecked")
@@ -64,7 +64,7 @@ public class Model {
     }
     
     static List<DBAccount> showUserListByUniqueSearch(String account){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("from DBAccount as u where u.accountname like :searchName");
         accountDB.setParameter("searchName", "%"+account+"%");
@@ -80,7 +80,7 @@ public class Model {
 // http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
 
     static DBAccount showUserByUniqueSearch(String account){
-        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select * from DBAccount as u where u.accountname like :searchName");
         accountDB.setParameter("searchName", account);
@@ -91,7 +91,7 @@ public class Model {
     
     
 //    static List<DBAccount> showUserListByUniqueSearch(String account){
-//        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+//        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
 //        Transaction transaction = session.beginTransaction();
 //String queryStr = "from Student s where s.name like :searchName"; 
 //List result = session.createQuery(queryStr) 
