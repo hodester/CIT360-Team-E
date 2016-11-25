@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "DB_user")
-public class DataBaseUser implements Serializable {
+public class DataBaseAccount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,30 +32,30 @@ public class DataBaseUser implements Serializable {
     @Column(name = "CREATED_DATE")
     private Date createdDate;
 
-    public DBAccount() {
+    public DataBaseAccount() {
 
     }
 
-    public DBAccount(Integer id, String name, String by, Date date) {
+    public DataBaseAccount(Integer id, String name, String by, Date date) {
         this.accountId = id;
         this.accountname = name;
         this.createdBy = by;
         this.createdDate = date;
     }
 
-    public int getUserId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public void setUserId(int accountId) {
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 
-    public String getUsername() {
+    public String getAccountname() {
         return accountname;
     }
 
-    public void setUsername(String accountusername) {
+    public void setAccountname(String accountusername) {
         this.accountname = accountname;
     }
 

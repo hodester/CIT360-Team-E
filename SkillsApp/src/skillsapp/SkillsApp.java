@@ -6,7 +6,6 @@
 package skillsapp;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,21 +24,61 @@ public class SkillsApp {
         boolean stopUsing = false;
 
         while (!stopUsing) {
-            stopUsing = skillsApp.mainMenu();
+            //stopUsing = skillsApp.mainMenu();
+            stopUsing = skillsApp.accountLogin();
         }
 
         System.exit(0);
 
     }
 
-    private boolean mainMenu() {
+    private boolean accountLogin() {
+        boolean stopUsing = false;
+
+        while (!stopUsing) {
+            String accountname = null;
+            String password = null;
+
+            System.out.println("For testing");
+            System.out.println("Administrator Menu access:");
+            System.out.println("U: mark3   P: mark3");
+            System.out.println();
+            System.out.println("User Menu access:");
+            System.out.println("U: matt5  P: matt5");
+            System.out.println();
+            System.out.println();
+            System.out.println("Welcom to Skills lister");
+            System.out.print("Please enter user name: ");
+            accountname = accountInput.nextLine();
+            System.out.print("Please enter password: ");
+            password = accountInput.nextLine();
+
+//            DB_user_table theUser = Controller.accountLogin(username, password);
+//            boolean isAdmin = Controller.ckAdmin(theUser);
+            boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
+
+            while (isAdmin && !stopUsing) {
+                stopUsing = adminMainMenu();
+            }
+
+            while (!isAdmin && !stopUsing) {
+                stopUsing = userMainMenu();
+            }
+
+            stopUsing = true;
+        }
+
+        return stopUsing;
+    }
+
+    private boolean adminMainMenu() {
         boolean stopUsing = false;
 
         while (!stopUsing) {
             Integer choice = null;
 
             System.out.println();
-            System.out.println("Main Menu");
+            System.out.println("Administrator Main Menu");
 
             // place while loop for main menu here
             // and remove unneeded System.out.println()'s
@@ -106,32 +145,19 @@ public class SkillsApp {
         System.out.println();
         System.out.println("Please Enter the following");
 
-// The following code was change to add ACP compliance to the program 
-//        System.out.print("Account Name:  ");
-//        String aAccountName = accountInput.nextLine();
-//        System.out.print("Created By:  ");
-//        String aCreatedBy = accountInput.nextLine();
-// The following was added for ACP compliance
         String aAccountName = VsystemInputAccountName(account);
         String aCreatedBy = VsystemInputCreatedBy(account);
 
         Controller.creatAccount(aAccountName, aCreatedBy);
         System.out.println();
-
     }
 
     private void VlistAccount() {
-
-        System.out.println("Accounts currently in Database");
-        System.out.printf("%-10s%-20s%-20s%-20s\n", "account_id", "accountname", "created_by", "created_date");
-        System.out.printf("%-10s%-20s%-20s%-20s\n", "+++++++", "++++++++", "++++++++++", "++++++++++++");
-        System.out.println();
-
-        Iterator<DBAccount> iteratedAccounts = Controller.listAccount().iterator();
-
-        while (iteratedAccounts.hasNext()) {
-            DBAccount account = iteratedAccounts.next();
-            System.out.printf("%-10s%-20s%-20s%-20s\n", account.getAccountId(), account.getAccountname(), account.getCreatedBy(), account.getCreatedDate());
+        AccountsInDatabase();
+        Iterator<DataBaseAccount> iteratedUsers = Controller.listAccount().iterator();
+        while (iteratedUsers.hasNext()) {
+            DataBaseAccount account = iteratedUsers.next();
+            System.out.printf("%-10s%-20s%-20s%-20s\\n", account.getAccountId(), account.getAccountname(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
 
@@ -149,18 +175,10 @@ public class SkillsApp {
             return;
         }
 
-//NEED to ADD AN ESCAPE PATH
-        //Controller.exit(Integer.parseInt(searchedAccount));
-        System.out.println("Accounts currently in Database");
-        System.out.printf("%-10s%-20s%-20s%-20s\n", "account_id", "accountname", "created_by", "created_date");
-        System.out.printf("%-10s%-20s%-20s%-20s\n", "+++++++", "++++++++", "++++++++++", "++++++++++++");
-        System.out.println();
-
-//         Iterator<DBAccount> iteratedAccounts = Controller.listAccount().iterator();
-        Iterator<DBAccount> iteratedAccounts = Controller.listSearchedAccount(searchedAccount).iterator();
-
+        AccountsInDatabase();
+        Iterator<DataBaseAccount> iteratedAccounts = Controller.listSearchedAccount(searchedAccount).iterator();
         while (iteratedAccounts.hasNext()) {
-            DBAccount account = iteratedAccounts.next();
+            DataBaseAccount account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s%-20s\n", account.getAccountId(), account.getAccountname(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
@@ -169,7 +187,6 @@ public class SkillsApp {
         String aAccountName = null;
         String aCreatedBy = null;
 
-//    System.out.println("update account stub");
         VlistAccount();
 
         System.out.println("");
@@ -185,26 +202,13 @@ public class SkillsApp {
         }
 
         Controller.exit(account);
-        DBAccount updateAccount = Controller.updateAccount(account);
+        DataBaseAccount updateAccount = Controller.updateAccount(account);
 
         System.out.println("");
         System.out.println("Updating Account: " + updateAccount.getAccountname());
         System.out.println("");
         System.out.println("Enter the corrected Information or press enter to keep the current Information just press Enter....");
 
-// The following code was change to add ACP compliance to the program 
-//    System.out.println("Account Name:       " + updateAccount.getAccountname());
-//    System.out.print("new Account Name:   ");
-//    aAccountName = Controller.ckForAccount(account,accountInput.nextLine());
-//    System.out.println("Account CREATED_BY: " + updateAccount.getCreatedBy());
-//    System.out.print("new CREATED_BY:  ");
-//    aCreatedBy = Controller.ckForCreatedBy(account,accountInput.nextLine());
-// add a confirm info is correst here
-// to do that right the 16 lines above will need ot be moved 
-// to a new method and called as a package
-// IF done right the Add account could also call this method
-// and the skillsApp would become ACP compliant 
-// The following was added for ACP compliance
         aAccountName = VsystemInputAccountName(account);
         aCreatedBy = VsystemInputCreatedBy(account);
 
@@ -244,33 +248,95 @@ public class SkillsApp {
         Controller.exit(account);
 
         System.out.println("Please confirm remove USER (Y/N)");
-        System.out.println("Caution: This can not be undone!");
+        System.out.println("Caution: Changes are permant and can not be reversed");
         String YESorNO = accountInput.nextLine();
 
-//    String Happened = Controller.deleteAccount(account,YESorNO);
         System.out.println("");
         System.out.println(Controller.deleteAccount(account, YESorNO));
         System.out.println("");
-
     }
 
-// THESE ARE NOT FULLY WORKING
-// changing code to ACP compliance
     private String VsystemInputAccountName(Integer account) {
-//    DBAccount updateAccount = Controller.updateAccount(account);
-
         System.out.print("Account Name:       " + Controller.ckAccount(account) + "   ");
         String aAccountName = Controller.ckForAccount(account, accountInput.nextLine());
         return aAccountName;
     }
 
     private String VsystemInputCreatedBy(Integer account) {
-//    DBAccount updateAccount = Controller.updateAccount(account);
-
         System.out.print("Account CREATED_BY: " + Controller.ckCreatedBy(account) + "   ");
         String aCreatedBy = Controller.ckForCreatedBy(account, accountInput.nextLine());
-
         return aCreatedBy;
     }
 
+    private void AccountsInDatabase() {
+        System.out.println("Users currently in Database");
+        System.out.printf("%-10s%-20s%-20s%-20s\n", "user_id", "username", "created_by", "created_date");
+        System.out.printf("%-10s%-20s%-20s%-20s\n", "+++++++", "++++++++", "++++++++++", "++++++++++++");
+        System.out.println();
+    }
+
+// THIS IS TESTING AREA
+    private boolean DBTESTlistUser() {
+        AccountsInDatabase();
+        Iterator<DB_user_table> iteratedUsers = Controller.DBTESTlistUser().iterator();
+        while (iteratedUsers.hasNext()) {
+            DB_user_table user = iteratedUsers.next();
+            System.out.printf("%-10s%-20s%-20s%-20s\n", user.getUserName(), user.getPassword(), user.getAdminUser(), user.getMember_ID());
+        }
+
+        return true;
+    }
+
+    private boolean userMainMenu() {
+        boolean stopUsing = false;
+
+        while (!stopUsing) {
+            Integer choice = null;
+
+            System.out.println();
+            System.out.println("Main Menu");
+
+            // FUTURE PLANNING: place while loop for main menu here
+            // and remove unneeded System.out.println()'s
+            System.out.println(" 1 - List All User's");
+            System.out.println(" 2 - List User by name search");
+            System.out.println(" 3 - QUIT");
+
+            System.out.println("Please make a Selection");
+
+            try {
+                choice = Integer.parseInt(accountInput.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println();
+                System.out.println("Invalid Entry, please try again.");
+                System.out.println();
+                return false;
+            }
+
+            switch (choice) {
+
+                case 1:
+                    VlistAccount();
+                    break;
+
+                case 2:
+                    VlistSearchedAccount();
+                    break;
+
+                case 3:
+                    stopUsing = true;
+                    break;
+
+                default:
+                    System.out.println();
+                    System.out.println("Invalid Entry, please try again.");
+                    System.out.println();
+                    break;
+
+            }
+
+        }
+
+        return stopUsing;
+    }
 }

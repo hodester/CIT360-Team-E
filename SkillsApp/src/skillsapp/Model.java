@@ -17,59 +17,59 @@ import org.hibernate.Transaction;
  */
 public class Model {
     /*
-     * DBAccount Database functions
+     * DataBaseAccount Database functions
      */
     
-    static void insertUser(DBAccount account) {
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static void insertAccount(DataBaseAccount account) {
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(account);
         transaction.commit();
     }
     
-    static void updateUser(DBAccount updateDB){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static void updateAccount(DataBaseAccount updateDB){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-	Query accountDB = session.createQuery("Select u from DBAccount as u where u.id = :uId");
-	accountDB.setParameter("uId", updateDB.getUserId());
+	Query accountDB = session.createQuery("Select u from DataBaseAccount as u where u.id = :uId");
+	accountDB.setParameter("uId", updateDB.getAccountId());
 	session.merge(updateDB);
         transaction.commit();
     }
     
-    static void deletUser(DBAccount account){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static void deletAccount(DataBaseAccount account){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.delete(account);
         transaction.commit();
     }
     
-    static DBAccount showUserByID(Integer account){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static DataBaseAccount showAccountByID(Integer account){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DBAccount as u where u.id = :uId");
+        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccount as u where u.id = :uId");
         accountDB.setParameter("uId", account);
-        DBAccount theUser = (DBAccount) accountDB.uniqueResult();
+        DataBaseAccount theAccount = (DataBaseAccount) accountDB.uniqueResult();
         transaction.commit();
-        return theUser;
+        return theAccount;
     }
     
-    static List<DBAccount> showAllUsers(){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static List<DataBaseAccount> showAllAccounts(){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DBAccount as u");
+        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccount as u");
         @SuppressWarnings("unchecked")
-        List<DBAccount> accountList = accountDB.list();
+        List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
     
-    static List<DBAccount> showUserListByUniqueSearch(String account){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static List<DataBaseAccount> showAccountListByUniqueSearch(String account){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("from DBAccount as u where u.accountname like :searchName");
+        Query accountDB = (Query) session.createQuery("from DataBaseAccount as u where u.accountname like :searchName");
         accountDB.setParameter("searchName", "%"+account+"%");
         @SuppressWarnings("unchecked")
-        List<DBAccount> accountList = accountDB.list();
+        List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
@@ -79,25 +79,23 @@ public class Model {
 // NOT working below this line  -  YET
 // http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
 
-    static DBAccount showUserByUniqueSearch(String account){
-        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+    static DataBaseAccount showAccountByUniqueSearch(String account){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select * from DBAccount as u where u.accountname like :searchName");
+        Query accountDB = (Query) session.createQuery("Select * from DataBaseAccount as u where u.accountname like :searchName");
         accountDB.setParameter("searchName", account);
-        DBAccount theUser = (DBAccount) accountDB.uniqueResult();
+        DataBaseAccount theAccount = (DataBaseAccount) accountDB.uniqueResult();
         transaction.commit();
-        return theUser;
+        return theAccount;
     }
     
-    
-//    static List<DBAccount> showUserListByUniqueSearch(String account){
-//        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//String queryStr = "from Student s where s.name like :searchName"; 
-//List result = session.createQuery(queryStr) 
-//            result.setString("searchName",account); 
-//            .list; 
-//   
-//}
-    
+    static List<DB_user_table> showAllDBAccounts(){
+        Session session = DataBaseSF.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("Select u from DB_user_table as u");
+        @SuppressWarnings("unchecked")
+        List<DB_user_table> userList = userDB.list();
+        transaction.commit();
+        return userList;
+    }
 }

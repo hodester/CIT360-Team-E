@@ -17,12 +17,28 @@ public class Controller {
 
     private Scanner accountInput = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    static DB_user_table accountLogin(String accountname, String password) {
+        DB_user_table account = Model.showAccountByUniqueSearch(accountname);
+        //DB_user_table account = Model.showAccountByUniqueSearch(accountName, password);
+        if (account != null) {
+            return account;
+        }
+        return account;
+    }
+
+    static boolean ckAdmin(DB_user_table theAccount) {
+        Integer admin = theAccount.getAdminUser();
+
+        if (admin == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     static void creatAccount(String aAccountName, String aCreatedBy) {
 
-        DBAccount person = new DBAccount();
+        DataBaseAccount person = new DataBaseAccount();
         person.setAccountname(aAccountName);
         person.setCreatedBy(aCreatedBy);
         person.setCreatedDate(new Date());
@@ -30,17 +46,17 @@ public class Controller {
         Model.insertAccount(person);
     }
 
-    static DBAccount updateAccount(Integer account) {
+    static DataBaseAccount updateAccount(Integer account) {
         if ("".equals(account)) {
             return null;
         } else {
-            DBAccount theAccount = Model.showAccountByID(account);
+            DataBaseAccount theAccount = Model.showAccountByID(account);
             return theAccount;
         }
     }
 
-    static DBAccount updateTheAccount(Integer account, String name, String by) {
-        DBAccount person = new DBAccount();
+    static DataBaseAccount updateTheAccount(Integer account, String name, String by) {
+        DataBaseAccount person = new DataBaseAccount();
         person.setAccountId(account);
         person.setAccountname(name);
         person.setCreatedBy(by);
@@ -51,13 +67,13 @@ public class Controller {
 
     }
 
-    static List<DBAccount> listAccount() {
-        List<DBAccount> accountList = Model.showAllAccounts();
+    static List<DataBaseAccount> listAccount() {
+        List<DataBaseAccount> accountList = Model.showAllAccounts();
         return accountList;
     }
 
-    static List<DBAccount> listSearchedAccount(String account) {
-        List<DBAccount> accountList = Model.showAccountListByUniqueSearch(account);
+    static List<DataBaseAccount> listSearchedAccount(String account) {
+        List<DataBaseAccount> accountList = Model.showAccountListByUniqueSearch(account);
         return accountList;
     }
 
@@ -78,11 +94,6 @@ public class Controller {
         if (!"".equals(name)) {
             return name;
         } else {
-//            DBAccount theAccount = Model.showAccountByID(account);
-//            DBAccount theAccount = updateAccount(account);
-//            return theAccount.getAccountname();
-
-// this line makes this ACP compliant
             return theAccount(account);
         }
     }
@@ -91,18 +102,13 @@ public class Controller {
         if (!"".equals(by)) {
             return by;
         } else {
-//            DBAccount theAccount = Model.showAccountByID(account);
-//            DBAccount theAccount = updateAccount(account);
-//            return theAccount.getCreatedBy();
-
-// This line makes this ACP compliant
             return theCreatedBy(account);
         }
     }
 
     static void exit(Integer account) {
         if (account == 0) {
-            View.main(null);
+            SkillsApp.main(null);
         }
     }
 
@@ -110,9 +116,6 @@ public class Controller {
         if (account == null) {
             return "";
         } else {
-//            DBAccount theAccount = Model.showAccountByID(account);
-//            return theAccount.getAccountname();
-//This makes these ACP compliant
             return theAccount(account);
         }
     }
@@ -121,20 +124,17 @@ public class Controller {
         if (account == null) {
             return "";
         } else {
-//            DBAccount theAccount = Model.showAccountByID(account);
-//            return theAccount.getCreatedBy();
-//This makes these ACP compliant
-            return theCreatedBy(account);
+            return theCreatedBy(account) + " - update to: ";
         }
     }
 
     static String theAccount(Integer account) {
-        DBAccount theAccount = Model.showAccountByID(account);
+        DataBaseAccount theAccount = Model.showAccountByID(account);
         return theAccount.getAccountname();
     }
 
     static String theCreatedBy(Integer account) {
-        DBAccount theAccount = Model.showAccountByID(account);
+        DataBaseAccount theAccount = Model.showAccountByID(account);
         return theAccount.getCreatedBy();
     }
 
@@ -150,6 +150,12 @@ public class Controller {
      */
     public void setAccountInput(Scanner accountInput) {
         this.accountInput = accountInput;
+    }
+
+    // THIS IS TESTING AREA
+    static List<DB_user_table> DBTESTlistUser() {
+        List<DB_user_table> accountList = Model.showAllDBAccounts();
+        return accountList;
     }
 
 }

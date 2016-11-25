@@ -16,7 +16,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  *
  * @author mhodes
  */
-public class DBSessionFactory {
+public class DataBaseSF {
     private static final SessionFactory sessionFactory;
     
     static{
@@ -34,6 +34,7 @@ public class DBSessionFactory {
         config.setProperty("hibernate.current_session_context_class", "thread");
         
         config.addAnnotatedClass(SkillsApp.class);
+	config.addAnnotatedClass(DB_user_table.class);
         
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
@@ -45,7 +46,7 @@ public class DBSessionFactory {
         return sessionFactory;
     }
     
-    private DBSessionFactory(){   
+    private DataBaseSF(){   
         
     }
     
