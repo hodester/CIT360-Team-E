@@ -53,9 +53,9 @@ public class SkillsApp {
             System.out.print("Please enter password: ");
             password = accountInput.nextLine();
 
-//            DB_user_table theUser = Controller.accountLogin(username, password);
+            DB_user_table theUser = Controller.accountLogin(accountname, password);
 //            boolean isAdmin = Controller.ckAdmin(theUser);
-            boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
+            boolean isAdmin = Controller.ckAdmin(theUser);
 
             while (isAdmin && !stopUsing) {
                 stopUsing = adminMainMenu();

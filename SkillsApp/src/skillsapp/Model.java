@@ -56,7 +56,7 @@ public class Model {
     static List<DataBaseAccount> showAllAccounts(){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccount as u");
+        Query accountDB = (Query) session.createQuery("Select u from DB_user as u");
         @SuppressWarnings("unchecked")
         List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
@@ -66,8 +66,8 @@ public class Model {
     static List<DataBaseAccount> showAccountListByUniqueSearch(String account){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("from DataBaseAccount as u where u.accountname like :searchName");
-        accountDB.setParameter("searchName", "%"+account+"%");
+        Query accountDB = (Query) session.createQuery("from DB_User as u where u.username like :account");
+        accountDB.setParameter("account", "%"+account+"%");
         @SuppressWarnings("unchecked")
         List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
@@ -79,12 +79,13 @@ public class Model {
 // NOT working below this line  -  YET
 // http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
 
-    static DataBaseAccount showAccountByUniqueSearch(String account){
+    static DB_user_table showAccountByUniqueSearch(String account, String password){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select * from DataBaseAccount as u where u.accountname like :searchName");
-        accountDB.setParameter("searchName", account);
-        DataBaseAccount theAccount = (DataBaseAccount) accountDB.uniqueResult();
+        Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u where u.username = :account and u.password = :password");
+        accountDB.setParameter("account", account);
+        accountDB.setParameter("password", password);
+        DB_user_table theAccount = (DB_user_table) accountDB.uniqueResult();
         transaction.commit();
         return theAccount;
     }
