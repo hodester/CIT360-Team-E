@@ -19,7 +19,6 @@ public class Controller {
 
     static DB_user_table accountLogin(String accountname, String password) {
         DB_user_table account = Model.showAccountByUniqueSearch(accountname, password);
-        //DB_user_table account = Model.showAccountByUniqueSearch(accountName, password);
         if (account != null) {
             return account;
         }
