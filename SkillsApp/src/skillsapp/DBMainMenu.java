@@ -18,16 +18,16 @@ import javax.persistence.*;
 @Table(name = "DBMAINMENU")
 public class DBMainMenu {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    
+
      @Column(name = "MENU_ID")
      private int menuId;
-     
+
      @Column(name = "MENU_NAME")
      private String menuName;
-     
+
      public DBMainMenu(){
      }
-     
+
      public DBMainMenu(Integer id, String name){
         this.menuId = id;
         this.menuName = name;
@@ -60,5 +60,5 @@ public class DBMainMenu {
     public void setMenuName(String menuName) {
         this.menuName = menuName;
     }
-    
+
 }

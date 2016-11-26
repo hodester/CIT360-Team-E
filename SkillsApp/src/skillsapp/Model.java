@@ -82,7 +82,7 @@ public class Model {
     static DB_user_table showAccountByUniqueSearch(String account, String password){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u where u.username = :account and u.password = :password");
+        Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u where u.accountName = :account and u.password = :password");
         accountDB.setParameter("account", account);
         accountDB.setParameter("password", password);
         DB_user_table theAccount = (DB_user_table) accountDB.uniqueResult();

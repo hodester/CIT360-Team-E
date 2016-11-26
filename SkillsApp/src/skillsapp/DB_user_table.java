@@ -30,16 +30,20 @@ public class DB_user_table implements Serializable{
     @Column(name = "memberID")
      private int memberID;
     
+    @Column(name = "isActive")
+     private int isActive;
+    
     public DB_user_table(){
     }
     
 
 
-    public DB_user_table(String username, String password, Integer adminuser, Integer id){
+    public DB_user_table(String username, String password, Integer adminuser, Integer id, Integer isActive){
         this.accountName = username;
         this.password = password;
         this.adminUser = adminuser;        
         this.memberID = id;
+        this.isActive = isActive;
     }
 
     public int getMember_ID() {
@@ -65,6 +69,20 @@ public class DB_user_table implements Serializable{
     }
     public void setAdminUser(int adminuser) {
         this.adminUser = adminuser;
+    }
+
+    /**
+     * @return the isActive
+     */
+    public int getIsActive() {
+        return isActive;
+    }
+
+    /**
+     * @param isActive the isActive to set
+     */
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
     
 }
