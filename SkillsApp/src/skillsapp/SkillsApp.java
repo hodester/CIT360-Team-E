@@ -39,13 +39,6 @@ public class SkillsApp {
             String accountname = null;
             String password = null;
 
-            System.out.println("For testing");
-            System.out.println("Administrator Menu access:");
-            System.out.println("U: mark3   P: mark3");
-            System.out.println();
-            System.out.println("User Menu access:");
-            System.out.println("U: matt5  P: matt5");
-            System.out.println();
             System.out.println();
             System.out.println("Welcom to Skills lister");
             System.out.print("Please enter user name: ");

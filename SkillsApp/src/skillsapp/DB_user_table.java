@@ -18,6 +18,9 @@ import javax.persistence.*;
 public class DB_user_table implements Serializable{
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     
+    @Column(name = "userID")
+    private int userID;
+    
     @Column(name = "username")
      private String accountName;
     
