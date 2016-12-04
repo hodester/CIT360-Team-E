@@ -19,7 +19,7 @@ public class DataBaseUserTable implements Serializable{
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     
     @Column(name = "userID")
-     private int accountID;
+    private int userID;
     
     @Column(name = "username")
      private String accountName;
@@ -30,9 +30,8 @@ public class DataBaseUserTable implements Serializable{
     @Column(name = "adminuser")
      private int adminUser;
     
-    @OneToOne
-    @JoinColumn(name = "memberID", nullable=false)
-     private DB_member_table memberMapping;
+    @Column(name = "memberID")
+     private int memberID;
     
     @Column(name = "isActive")
      private int isActive;
@@ -40,19 +39,27 @@ public class DataBaseUserTable implements Serializable{
     public DataBaseUserTable(){
     }
     
-    public DataBaseUserTable(Integer accountID, String username, String password, Integer adminuser, DB_member_table id, Integer isActive){
-        this.accountID = userID;
+
+
+    public DataBaseUserTable(String username, String password, Integer adminuser, Integer id, Integer isActive){
         this.accountName = username;
         this.password = password;
         this.adminUser = adminuser;        
+        this.memberID = id;
         this.isActive = isActive;
     }
 
-       public String getAccountName() {
+    public int getMember_ID() {
+        return memberID;
+    }
+    public void setMember_ID(int member_ID) {
+        this.memberID = member_ID;
+    }
+    public String getUserName() {
         return accountName;
     }
-    public void setAccountName(String accountname) {
-        this.accountName = accountname;
+    public void setUserName(String username) {
+        this.accountName = username;
     }
     public String getPassword() {
         return password;
@@ -80,32 +87,5 @@ public class DataBaseUserTable implements Serializable{
     public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
-
-    /**
-     * @return the memberMapping
-     */
-    public DB_member_table getMemberMapping() {
-        return memberMapping;
-    }
-
-    /**
-     * @param memberMapping the memberMapping to set
-     */
-    public void setMemberMapping(DB_member_table memberMapping) {
-        this.memberMapping = memberMapping;
-    }
-
-    /**
-     * @return the accountID
-     */
-    public int getAccountID() {
-        return accountID;
-    }
-
-    /**
-     * @param accountID the userID to set
-     */
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
+    
 }

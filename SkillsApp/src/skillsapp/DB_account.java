@@ -75,4 +75,3 @@ public int getAccountId() {
  this.createdDate = createdDate;
  }
 }
-

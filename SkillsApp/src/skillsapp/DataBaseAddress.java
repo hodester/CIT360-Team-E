@@ -132,4 +132,3 @@ public class DataBaseAddress implements Serializable {
         this.addresses = addresses;
     }
 }
-
