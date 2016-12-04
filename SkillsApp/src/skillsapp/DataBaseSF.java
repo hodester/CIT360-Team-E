@@ -17,9 +17,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  * @author mhodes
  */
 public class DataBaseSF {
+
     private static final SessionFactory sessionFactory;
-    
-    static{
+
+    static {
         Configuration config = new Configuration();
         config.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         config.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
@@ -32,22 +33,24 @@ public class DataBaseSF {
         config.setProperty("hibernate.show_sql", "false");
         config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
         config.setProperty("hibernate.current_session_context_class", "thread");
-        
-        config.addAnnotatedClass(SkillsApp.class);
-	config.addAnnotatedClass(DB_user_table.class);
-        
+
+        config.addAnnotatedClass(DB_account.class);
+        config.addAnnotatedClass(DataBaseUserTable.class);
+        config.addAnnotatedClass(DB_member_table.class);
+        config.addAnnotatedClass(DB_address_table.class);
+        config.addAnnotatedClass(DB_skills_table.class);
+
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
         sessionFactory = config.buildSessionFactory(serviceRegistry);
-        
+
     }
-    
-    public static SessionFactory getSessionFactory(){
+
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-    
-    private DataBaseSF(){   
-        
+
+    private DataBaseSF(){
     }
-    
+
 }

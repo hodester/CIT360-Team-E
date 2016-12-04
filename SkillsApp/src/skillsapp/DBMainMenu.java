@@ -6,7 +6,6 @@
 package skillsapp;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -60,5 +59,4 @@ public class DBMainMenu {
     public void setMenuName(String menuName) {
         this.menuName = menuName;
     }
-
 }
