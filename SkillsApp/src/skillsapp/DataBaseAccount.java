@@ -51,11 +51,11 @@ public class DataBaseAccount implements Serializable {
         this.accountId = accountId;
     }
 
-    public String getAccountName() {
+    public String getAccountname() {
         return accountname;
     }
 
-    public void setAccountName(String accountusername) {
+    public void setAccountname(String accountusername) {
         this.accountname = accountname;
     }
 

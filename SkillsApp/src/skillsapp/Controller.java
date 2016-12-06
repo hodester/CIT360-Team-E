@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Controller {
 
-    static void creatAccountRecord(String aAccountName, String aPassword, String aIsAdmin, 
+    static void createAccountRecord(String aAccountName, String aPassword, String aIsAdmin, 
             String aFirstName, String aMiddelName, String aLastName, String aPhone, 
             Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, 
             String aState, String aZipCode) {
@@ -351,9 +351,9 @@ public class Controller {
     
 //    public static void main(String[] args) {}
 
-    static DataBaseAccountTable accountLogin(String username, String password) {
+    static DataBaseAccountTable accountLogin(String accountName, String password) {
 // Skills Resource Assistant ~ method        
-        DataBaseAccountTable account = Model.showAccountByUniqueSearch(username, password);
+        DataBaseAccountTable account = Model.showAccountByUniqueSearch(accountName, password);
         if (account != null){
             return account;
         }
@@ -376,7 +376,7 @@ public class Controller {
     static void creatAccount(String aAccountName, String aCreatedBy) {
         
              DataBaseAccount person = new DataBaseAccount();
-             person.setAccountName(aAccountName);
+             person.setAccountname(aAccountName);
              person.setCreatedBy(aCreatedBy);
              person.setCreatedDate(new Date());
              
@@ -392,10 +392,10 @@ public class Controller {
          }
     }
     
-    static DataBaseAccount updatetheAccount(Integer account, String name, String by){
+    static DataBaseAccount updateTheAccount(Integer account, String name, String by){
          DataBaseAccount person = new DataBaseAccount();
          person.setAccountId(account);
-         person.setAccountName(name);
+         person.setAccountname(name);
          person.setCreatedBy(by);
          person.setCreatedDate(new Date());
              
@@ -467,7 +467,7 @@ public class Controller {
 
     static String theAccount(Integer account){
          DataBaseAccount theAccount = Model.showAccountByID(account);
-         return theAccount.getAccountName();
+         return theAccount.getAccountname();
     }
     
     static String theCreatedBy(Integer account){

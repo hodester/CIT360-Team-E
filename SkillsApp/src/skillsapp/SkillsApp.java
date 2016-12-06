@@ -39,12 +39,10 @@ public class SkillsApp {
 
             System.out.println("Welcom to Skills application");
             System.out.print("Please enter account name: ");
-//            accountname = accountInput.nextLine();
-//            System.out.print("Please enter password: ");
-//            password = accountInput.nextLine();
+
             boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
             boolean isMemberActive Controller.ckIsActive(Controller.accountLogin(accountname, password));
-            
+
             isAdmin = Controller.ckIfActive(isAdmin, isMemberActive);
 
             while (isAdmin && !stopUsing) {
@@ -59,14 +57,14 @@ public class SkillsApp {
         return stopUsing;
     }
 
-    private boolean adminMainMenu() {
+    private boolean adminMenu() {
         boolean stopUsing = false;
 
         while (!stopUsing) {
             Integer choice = null;
 
             System.out.println();
-            System.out.println("Administrator Main Menu");
+            System.out.println("Administrator Menu");
 
             System.out.println(" 1 - Add Account");
             System.out.println(" 2 - List All Account's");
@@ -94,7 +92,7 @@ public class SkillsApp {
                     VListAccountByName();
                     break;
                 case 4:
-                    VlistAccountByInActive();
+                    VListAccountByInActive();
                     break;
                 case 5:
                     VEditAccount();
@@ -448,7 +446,7 @@ public class SkillsApp {
 
     /*
     * return
-    */
+     */
     public boolean adminMainMenu() {
         boolean stopUsing = false;
 
@@ -536,7 +534,7 @@ public class SkillsApp {
         Iterator<DataBaseAccount> iteratedAccounts = Controller.listAccount().iterator();
         while (iteratedAccounts.hasNext()) {
             DataBaseAccount account = iteratedAccounts.next();
-            System.out.printf("%-10s%-20s%-20s%-20s\n", account.getUserId(), account.getUsername(), account.getCreatedBy(), account.getCreatedDate());
+            System.out.printf("%-10s%-20s%-20s%-20s\n", account.getAccountId(), account.getAccountname(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
 
@@ -559,7 +557,7 @@ public class SkillsApp {
         Iterator<DataBaseAccount> iteratedAccounts = Controller.listSearchedAccount(searchedAccount).iterator();
         while (iteratedAccounts.hasNext()) {
             DataBaseAccount account = iteratedAccounts.next();
-            System.out.printf("%-10s%-20s%-20s%-20s\n", account.getUserId(), account.getUsername(), account.getCreatedBy(), account.getCreatedDate());
+            System.out.printf("%-10s%-20s%-20s%-20s\n", account.getAccountId(), account.getAccountname(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
 
@@ -585,7 +583,7 @@ public class SkillsApp {
         DataBaseAccount updateAccount = Controller.updateAccount(account);
 
         System.out.println("");
-        System.out.println("Updating account: " + updateAccount.getUsername());
+        System.out.println("Updating account: " + updateAccount.getAccountname());
         System.out.println("");
         System.out.println("Enter the corrected Information or press enter to keep the current Information just press Enter....");
 
@@ -599,7 +597,7 @@ public class SkillsApp {
 
         // added the new account lised here
         System.out.println("Updated account information:");
-        System.out.println("account:       " + updateAccount.getUsername());
+        System.out.println("account:       " + updateAccount.getAccountname());
         System.out.println("CREATED_BY: " + updateAccount.getCreatedBy());
 
         System.out.println();
@@ -638,7 +636,7 @@ public class SkillsApp {
     }
 
     private String VsystemInputAccountName(Integer account) {
-        System.out.print("account Name:       " + Controller.ckUser(account) + "   ");
+        System.out.print("account Name:       " + Controller.ckAccount(account) + "   ");
         String aAccountName = Controller.ckForAccount(account, accountInput.nextLine());
         return aAccountName;
     }
@@ -657,12 +655,12 @@ public class SkillsApp {
     }
 
 // THIS IS TESTING AREA
-    private boolean DBTESTlistUser() {
+    private boolean DBTESTlistAccount() {
         AccountsCurrentlyInDB();
-        Iterator<DataBaseAccountTable> iteratedAccounts = Controller.DBTESTlistUser().iterator();
+        Iterator<DataBaseAccountTable> iteratedAccounts = Controller.DBTESTlistAccount().iterator();
         while (iteratedAccounts.hasNext()) {
             DataBaseAccountTable account = iteratedAccounts.next();
-            System.out.printf("%-10s%-20s%-20s\n", account.getUserName(), account.getPassword(), account.getAdminUser());
+            System.out.printf("%-10s%-20s%-20s\n", account.getAccountName(), account.getPassword(), account.getAdminAccount());
         }
 
         return true;
@@ -712,5 +710,5 @@ public class SkillsApp {
             }
         }
         return stopUsing;
-        }
     }
+}

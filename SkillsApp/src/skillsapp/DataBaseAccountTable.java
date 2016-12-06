@@ -57,8 +57,8 @@ public class DataBaseAccountTable implements Serializable{
     public String getAccountName() {
         return accountName;
     }
-    public void setAccountName(String username) {
-        this.accountName = username;
+    public void setAccountName(String accountname) {
+        this.accountName = accountname;
     }
     public String getPassword() {
         return password;

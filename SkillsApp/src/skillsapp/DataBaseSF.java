@@ -34,7 +34,7 @@ public class DataBaseSF {
         config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
         config.setProperty("hibernate.current_session_context_class", "thread");
 
-        config.addAnnotatedClass(DB_account.class);
+        config.addAnnotatedClass(DataBaseAccount.class);
         config.addAnnotatedClass(DataBaseAccountTable.class);
         config.addAnnotatedClass(DataBaseMembers.class);
         config.addAnnotatedClass(DataBaseAddress.class);
