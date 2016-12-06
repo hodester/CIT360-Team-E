@@ -18,59 +18,59 @@ import org.hibernate.Transaction;
 
 public class Model{
     /*
-     * DB_Account Database functions
+     * DataBaseAccount Database functions
      */
 
-    static void insertAccount(DB_Account account) {
+    static void insertAccount(DataBaseAccount account) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(account);
         transaction.commit();
     }
     
-    static void updateAccount(DB_Account accountDB){
+    static void updateAccount(DataBaseAccount updateDB){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-	Query accountDB = session.createQuery("Select u from DB_Account as u where u.id = :uId");
-	accountDB.setParameter("uId", accountDB.getAccountId());
-	session.merge(accountDB);
+	Query accountDB = session.createQuery("Select u from DataBaseAccount as u where u.id = :uId");
+	accountDB.setParameter("uId", updateDB.getAccountId());
+	session.merge(updateDB);
         transaction.commit();
     }
     
-    static void deletAccount(DB_Account account){
+    static void deletAccount(DataBaseAccount account){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.delete(account);
         transaction.commit();
     }
     
-    static DB_Account showAccountByID(Integer account){
+    static DataBaseAccount showAccountByID(Integer account){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DB_Account as u where u.id = :uId");
+        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccount as u where u.id = :uId");
         accountDB.setParameter("uId", account);
-        DB_Account theAccount = (DB_Account) accountDB.uniqueResult();
+        DataBaseAccount theAccount = (DataBaseAccount) accountDB.uniqueResult();
         transaction.commit();
         return theAccount;
     }
     
-    static List<DB_Account> showAllAccount(){
+    static List<DataBaseAccount> showAllAccount(){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DB_Account as u");
+        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccount as u");
         @SuppressWarnings("unchecked")
-        List<DB_Account> accountList = accountDB.list();
+        List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
     
-    static List<DB_Account> showAccountListByUniqueSearch(String account){
+    static List<DataBaseAccount> showAccountListByUniqueSearch(String account){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("from DB_Account as u where u.username like :searchName");
+        Query accountDB = (Query) session.createQuery("from DataBaseAccount as u where u.username like :searchName");
         accountDB.setParameter("searchName", "%"+account+"%");
         @SuppressWarnings("unchecked")
-        List<DB_Account> accountList = accountDB.list();
+        List<DataBaseAccount> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
@@ -78,23 +78,23 @@ public class Model{
      
 
 
-    static DataBaseUserTable showAccountByUniqueSearch(String account, String password){
+    static DataBaseAccountTable showAccountByUniqueSearch(String account, String password){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u where u.accountName = :username and u.password = :password");
         accountDB.setParameter("username", account);
         accountDB.setParameter("password", password);
-        DataBaseUserTable theAccount = (DataBaseUserTable) accountDB.uniqueResult();
+        DataBaseAccountTable theAccount = (DataBaseAccountTable) accountDB.uniqueResult();
         transaction.commit();
         return theAccount;
     }
 
-    static List<DataBaseUserTable> showAllDBAccounts(){
+    static List<DataBaseAccountTable> showAllDBAccounts(){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u");
         @SuppressWarnings("unchecked")
-        List<DataBaseUserTable> accountList = accountDB.list();
+        List<DataBaseAccountTable> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
@@ -102,39 +102,39 @@ public class Model{
     
 // END of FILE
 
-    static List<DB_member_table> showAllDBMemberTable() {
+    static List<DataBaseMembers> showAllDBMemberTable() {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select u from DB_member_table as u");
         @SuppressWarnings("unchecked")
-        List<DB_member_table> accountList = accountDB.list();
+        List<DataBaseMembers> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
 
-    static List<DB_member_table> showMemberTableListByUniqueSearch(String account) {
+    static List<DataBaseMembers> showMemberTableListByUniqueSearch(String account) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("from DB_member_table as u where u.FName like :searchName or u.LName like :searchName");
         accountDB.setParameter("searchName", "%"+account+"%");
         @SuppressWarnings("unchecked")
-        List<DB_member_table> accountList = accountDB.list();
+        List<DataBaseMembers> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
 
-    static List<DB_member_table> showAllActiveDBMemberTable() {
+    static List<DataBaseMembers> showAllActiveDBMemberTable() {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select m from DB_member_table as m inner join m.memberUser as u where u.isActive = :searchActive");
         accountDB.setParameter("searchActive", 0);
         @SuppressWarnings("unchecked")
-        List<DB_member_table> accountList = accountDB.list();
+        List<DataBaseMembers> accountList = accountDB.list();
         transaction.commit();
         return accountList;
     }
 
-    static void insertAccount(DataBaseUserTable account, DB_member_table member, DB_address_table address, Integer id) {
+    static void insertAccount(DataBaseAccountTable account, DataBaseMembers member, DataBaseAddress address, Integer id) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
@@ -150,48 +150,48 @@ public class Model{
         transaction.commit();        
     }
     
-    static List<DB_address_table> newMemberNumber(){
+    static List<DataBaseAddress> newMemberNumber(){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query memberDB = (Query) session.createQuery("Select u.addressID from DB_address_table AS u where u.addressID = (select max(t.addressID) from DB_address_table AS t)");
+        Query memberDB = (Query) session.createQuery("Select u.addressID from DataBaseAddress AS u where u.addressID = (select max(t.addressID) from DataBaseAddress AS t)");
         @SuppressWarnings("unchecked")
-        List<DB_address_table> memberList = memberDB.list();
+        List<DataBaseAddress> memberList = memberDB.list();
         transaction.commit();
         return memberList;
     }
 
-    static DB_member_table showMemberByID(Integer account) {
+    static DataBaseMembers showMemberByID(Integer account) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select m from DB_member_table as m where m.id = :mId");
         accountDB.setParameter("mId", account);
-        DB_member_table theAccount = (DB_member_table) accountDB.uniqueResult();
+        DataBaseMembers theAccount = (DataBaseMembers) accountDB.uniqueResult();
         transaction.commit();
         return theAccount;
     }
 
-    static DB_address_table AddressByMemberNumber(DB_address_table theMember) {
+    static DataBaseAddress AddressByMemberNumber(DataBaseAddress theMember) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select a from DB_address_table as a where a.addressID = :aId");
+        Query accountDB = (Query) session.createQuery("Select a from DataBaseAddress as a where a.addressID = :aId");
         accountDB.setParameter("aId", theMember.getAddressID());
-        DB_address_table theAddress = (DB_address_table) accountDB.uniqueResult();
+        DataBaseAddress theAddress = (DataBaseAddress) accountDB.uniqueResult();
         transaction.commit();
         return theAddress;
     }
 
-    static DataBaseUserTable accountByMemberNumber(DB_member_table theMember) {
+    static DataBaseAccountTable accountByMemberNumber(DataBaseMembers theMember) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query accountDB = (Query) session.createQuery("Select m from DB_user_table as m where m.memberMapping = :mId");
         accountDB.setParameter("mId", theMember);
-        DataBaseUserTable theAccount = (DataBaseUserTable) accountDB.uniqueResult();
+        DataBaseAccountTable theAccount = (DataBaseAccountTable) accountDB.uniqueResult();
         transaction.commit();
         return theAccount;
     }
 
 
-    static void updateTheAccount(DataBaseUserTable theAccount) {
+    static void updateTheAccount(DataBaseAccountTable theAccount) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 	Query accountDB = session.createQuery("Select u from DB_user_table as u where u.id = :uId");
@@ -200,7 +200,7 @@ public class Model{
         transaction.commit();
     }
 
-    static void updateTheMember(DB_member_table theMember) {
+    static void updateTheMember(DataBaseMembers theMember) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 	Query memberDB = session.createQuery("Select m from DB_member_table as m where m.id = :mId");
@@ -209,20 +209,20 @@ public class Model{
         transaction.commit();
     }
 
-    static void updateTheAddress(DB_address_table theAddress) {
+    static void updateTheAddress(DataBaseAddress theAddress) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-	Query addressDB = session.createQuery("Select a from DB_address_table as a where a.id = :aId");
+	Query addressDB = session.createQuery("Select a from DataBaseAddress as a where a.id = :aId");
 	addressDB.setParameter("aId", theAddress.getAddressID());
 	session.merge(theAddress);
         transaction.commit();
     }
 
-    static void deletMembersRecord(DB_member_table aMember) {
+    static void deletMembersRecord(DataBaseMembers aMember) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 //Address
-        Query addressDB = (Query) session.createQuery("DELETE from DB_address_table AS a where a = :aId");
+        Query addressDB = (Query) session.createQuery("DELETE from DataBaseAddress AS a where a = :aId");
         addressDB.setParameter("aId", aMember.getAddressTableMapping());
 //account
         Query accountDB = (Query) session.createQuery("DELETE from DB_user_table as m where m = :uId");
@@ -235,12 +235,6 @@ public class Model{
         memberDB.executeUpdate();
         addressDB.executeUpdate();
         
-        
         transaction.commit();
     }
-
-// NOT working below this line  -  YET
-// http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
-    
-    
 }

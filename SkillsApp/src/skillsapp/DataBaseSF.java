@@ -35,10 +35,10 @@ public class DataBaseSF {
         config.setProperty("hibernate.current_session_context_class", "thread");
 
         config.addAnnotatedClass(DB_account.class);
-        config.addAnnotatedClass(DataBaseUserTable.class);
-        config.addAnnotatedClass(DB_member_table.class);
-        config.addAnnotatedClass(DB_address_table.class);
-        config.addAnnotatedClass(DB_skills_table.class);
+        config.addAnnotatedClass(DataBaseAccountTable.class);
+        config.addAnnotatedClass(DataBaseMembers.class);
+        config.addAnnotatedClass(DataBaseAddress.class);
+        config.addAnnotatedClass(DataBaseSkills.class);
 
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();

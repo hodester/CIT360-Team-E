@@ -43,20 +43,16 @@ public class SkillsApp {
 //            System.out.print("Please enter password: ");
 //            password = accountInput.nextLine();
             boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
-            boolean isMemberActive Controller.ckIsActive(Controller.accountLogin(accountname, password))
-            :
+            boolean isMemberActive Controller.ckIsActive(Controller.accountLogin(accountname, password));
             
-            isAdmin = Controller.chIfActive(isAdmin, isMemberActive);
+            isAdmin = Controller.ckIfActive(isAdmin, isMemberActive);
 
-//            DataBaseUserTable theUser = Controller.accountLogin(accountname, password);
-////            boolean isAdmin = Controller.ckAdmin(theUser);
-//            boolean isAdmin = Controller.ckAdmin(theUser);
             while (isAdmin && !stopUsing) {
                 stopUsing = adminMainMenu();
             }
 
             while (!isAdmin && !stopUsing) {
-                stopUsing = userMainMenu();
+                stopUsing = accountMainMenu();
             }
             stopUsing = true;
         }
@@ -89,10 +85,10 @@ public class SkillsApp {
             switch (choice) {
 
                 case 1:
-                    VcreatAccount();
+                    VCreatAccount();
                     break;
                 case 2:
-                    VlistAccount();
+                    VListAccount();
                     break;
                 case 3:
                     VListAccountByName();
@@ -123,7 +119,7 @@ public class SkillsApp {
         return stopUsing;
     }
 
-    private boolean baseUser() {
+    private boolean baseAccount() {
         boolean stopUsing = false;
 
         while (!stopUsing) {
@@ -162,51 +158,51 @@ public class SkillsApp {
     /*
     * Administrator View
      */
-    private String VUserName(DataBaseUserTable account) {
+    private String VAccountName(DataBaseAccountTable account) {
 
-        System.out.print("Account Name: " + Control.ckForUserName(account));
+        System.out.print("Account Name: " + Controller.ckForAccountName(account));
         return accountInput.nextLine();
     }
 
-    private String VPassword(DataBaseUserTable account) {
+    private String VPassword(DataBaseAccountTable account) {
 
-        System.out.print("Password:  " + Control.ckForPassword(account));
+        System.out.print("Password:  " + Controller.ckForPassword(account));
         return accountInput.nextLine();
     }
 
-    private String VIsAdmin(DataBaseUserTable account) {
+    private String VIsAdmin(DataBaseAccountTable account) {
 
-        System.out.print("Administrator\n(y/n):  " + Control.ckForAdmin(account));
+        System.out.print("Administrator\n(y/n):  " + Controller.ckForAdmin(account));
         return accountInput.nextLine();
     }
 
-    private String VFirstName(DB_member_table account) {
+    private String VFirstName(DataBaseMembers account) {
 
-        System.out.print("First Name:\n::::  " + Control.ckForFirstName(account));
+        System.out.print("First Name:\n::::  " + Controller.ckForFirstName(account));
         return accountInput.nextLine();
     }
 
-    private String VMiddleName(DB_member_table account) {
+    private String VMiddleName(DataBaseMembers account) {
 
-        System.out.print("Middle Name:\n::::  " + Control.ckForMiddleName(account));
+        System.out.print("Middle Name:\n::::  " + Controller.ckForMiddleName(account));
         return accountInput.nextLine();
     }
 
-    private String VLastName(DB_member_table account) {
+    private String VLastName(DataBaseMembers account) {
 
-        System.out.print("Last Name:\n::::  " + Control.ckForLastName(account));
+        System.out.print("Last Name:\n::::  " + Controller.ckForLastName(account));
         return accountInput.nextLine();
     }
 
-    private String VPhone(DB_member_table account) {
+    private String VPhone(DataBaseMembers account) {
 
-        System.out.print("Phone Number:\n::::  " + Control.ckForPhone(account));
+        System.out.print("Phone Number:\n::::  " + Controller.ckForPhone(account));
         return accountInput.nextLine();
     }
 
-    private Integer VPhoneType(DB_member_table account) {
+    private Integer VPhoneType(DataBaseMembers account) {
 
-        System.out.print("Phone Type?\n1-Home, 2-cell, 3-business\n::::  " + Control.ckForPhoneType(account));
+        System.out.print("Phone Type?\n1-Home, 2-cell, 3-business\n::::  " + Controller.ckForPhoneType(account));
         Integer oldNumber = account.getPhoneType();
         Integer number = null;
         while (oldNumber == null) {
@@ -229,33 +225,33 @@ public class SkillsApp {
         return number;
     }
 
-    private String VEmail(DB_member_table account) {
+    private String VEmail(DataBaseMembers account) {
 
-        System.out.print("Email Address:\n::::  " + Control.ckForEmail(account));
+        System.out.print("Email Address:\n::::  " + Controller.ckForEmail(account));
         return accountInput.nextLine();
     }
 
-    private String VStreetAddress(DB_address_table account) {
+    private String VStreetAddress(DataBaseAddress account) {
 
-        System.out.print("Street Address\n::::  " + Control.ckForStreetAdress(account));
+        System.out.print("Street Address\n::::  " + Controller.ckForStreetAdress(account));
         return accountInput.nextLine();
     }
 
-    private String VCity(DB_address_table account) {
+    private String VCity(DataBaseAddress account) {
 
-        System.out.print("City\n::::  " + Control.ckForCity(account));
+        System.out.print("City\n::::  " + Controller.ckForCity(account));
         return accountInput.nextLine();
     }
 
-    private String VState(DB_address_table account) {
+    private String VState(DataBaseAddress account) {
 
-        System.out.print("State\n::::  " + Control.ckForState(account));
+        System.out.print("State\n::::  " + Controller.ckForState(account));
         return accountInput.nextLine();
     }
 
-    private String VZipCode(DB_address_table account) {
+    private String VZipCode(DataBaseAddress account) {
 
-        System.out.print("Zip Code\n::::  " + Control.ckForZipCode(account));
+        System.out.print("Zip Code\n::::  " + Controller.ckForZipCode(account));
         return accountInput.nextLine();
     }
 
@@ -270,7 +266,7 @@ public class SkillsApp {
         return numBer;
     }
 
-    private void VCreateRecord() {
+    private void VCreatAccount() {
 
 // METHOD working - See STUB statment for more info
         System.out.println("VCreateRecord() - STUB Needs final touches.");
@@ -280,13 +276,13 @@ public class SkillsApp {
 
         System.out.println("\nTo create a new record\nPlease Enter the following:\n");
 
-        DataBaseUserTable theAccount = null;
-        DB_member_table theMember = null;
-        DB_address_table theAddress = null;
+        DataBaseAccountTable theAccount = null;
+        DataBaseMembers theMember = null;
+        DataBaseAddress theAddress = null;
 
-        String aUserName = VUserName(theUser);
-        String aPassword = VPassword(theUser);
-        String aIsAdmin = VIsAdmin(theUser);
+        String aAccountName = VAccountName(theAccount);
+        String aPassword = VPassword(theAccount);
+        String aIsAdmin = VIsAdmin(theAccount);
         String aFirstName = VFirstName(theMember);
         String aMiddelName = VMiddleName(theMember);
         String aLastName = VLastName(theMember);
@@ -298,62 +294,62 @@ public class SkillsApp {
         String aState = VState(theAddress);
         String aZipCode = VZipCode(theAddress);
 
-        Control.creatUserRecord(aUserName, aPassword, aIsAdmin, aFirstName, aMiddelName, aLastName, aPhone, aPhoneType, aEmail, aStreetAddress, aCity, aState, aZipCode);
+        Controller.createAccountRecord(aAccountName, aPassword, aIsAdmin, aFirstName, aMiddelName, aLastName, aPhone, aPhoneType, aEmail, aStreetAddress, aCity, aState, aZipCode);
     }
 
-    private void VListAllUser() {
+    private void VListAccount() {
 // Skills Resource Assistant ~ method
 // METHOD COMPLETE
-        Iterator<DB_member_table> iteratedUsers = Control.listMemberTable().iterator();
+        Iterator<DataBaseMembers> iteratedAccounts = Controller.listMemberTable().iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
-        while (iteratedUsers.hasNext()) {
-            DB_member_table account = iteratedUsers.next();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseMembers account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s\n", account.getMemberID(), account.getFName(), account.getLName());
         }
     }
 
-    private void VListUserByName() {
+    private void VListAccountByName() {
 
 // METHOD working - needs an escape path
         System.out.println("\nPlease enter the name of a account to search for, \nor Enter to return to main menu:");
-        String searchedUser = null;
+        String searchedAccount = null;
         try {
-            searchedUser = accountInput.nextLine();
+            searchedAccount = accountInput.nextLine();
         } catch (NumberFormatException e) {
             System.out.println("\n\nInvalid Entry, please select a valid option.");
             return;
         }
 
         //NEED to ADD AN ESCAPE PATH
-        //Control.exit(Integer.parseInt(searchedUser));
-        Iterator<DB_member_table> iteratedUsers = Control.listSearchedMemberTable(searchedUser).iterator();
+        //Controller.exit(Integer.parseInt(searchedAccount));
+        Iterator<DataBaseMembers> iteratedAccounts = Controller.listSearchedMemberTable(searchedAccount).iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
-        while (iteratedUsers.hasNext()) {
-            DB_member_table account = iteratedUsers.next();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseMembers account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s\n", account.getMemberID(), account.getFName(), account.getLName());
         }
     }
 
-    private void VListUserByInActive() {
+    private void VListAccountByInActive() {
 
 // METHOD COMPLETE
-        Iterator<DB_member_table> iteratedUsers = Control.listIsActiveMemberTable().iterator();
+        Iterator<DataBaseMembers> iteratedAccounts = Controller.listIsActiveMemberTable().iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
-        while (iteratedUsers.hasNext()) {
-            DB_member_table account = iteratedUsers.next();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseMembers account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s\n", account.getMemberID(), account.getFName(), account.getLName());
         }
 
     }
 
-    private void VEditRecord() {
+    private void VEditAccount() {
 // Skills Resource Assistant ~ method
 // FUTURE UPDATE - Call a new menu to list all account or search by account name
 
-        VListAllUser();
+        VListAccount();
 
         System.out.println("\nPlease select a account to update from the list, or 0 to return to main menu:\n");
         Integer account = null;
@@ -364,18 +360,18 @@ public class SkillsApp {
             return;
         }
 
-        Control.exit(account);
+        Controller.exit(account);
 
-        DB_member_table theMember = Control.findMember(account);
-        DataBaseUserTable theUser = Control.findUser(theMember);
-        DB_address_table theAddress = Control.findAddress(theMember);
+        DataBaseMembers theMember = Controller.findMember(account);
+        DataBaseAccountTable theAccount = Controller.findAccount(theMember);
+        DataBaseAddress theAddress = Controller.findAddress(theMember);
 
         System.out.println("\nUpdating: " + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName()
                 + "\nEnter the corrected Information or press enter to keep the current Information just press Enter....");
 
-        String aUserName = VUserName(theUser);
-        String aPassword = VPassword(theUser);
-        String aIsAdmin = VIsAdmin(theUser);
+        String aAccountName = VAccountName(theAccount);
+        String aPassword = VPassword(theAccount);
+        String aIsAdmin = VIsAdmin(theAccount);
         String aFirstName = VFirstName(theMember);
         String aMiddelName = VMiddleName(theMember);
         String aLastName = VLastName(theMember);
@@ -387,19 +383,19 @@ public class SkillsApp {
         String aState = VState(theAddress);
         String aZipCode = VZipCode(theAddress);
 
-        account = Control.updateMemberRecord(aUserName, aPassword, aIsAdmin, aFirstName, aMiddelName, aLastName, aPhone, aPhoneType, aEmail, aStreetAddress, aCity, aState, aZipCode, theUser, theMember, theAddress);
-        DB_member_table theUpdatedMember = Control.findMember(account);
-        DataBaseUserTable theUpdatedUser = Control.findUser(theMember);
-        DB_address_table theUpdatedAddress = Control.findAddress(theMember);
+        account = Controller.updateMemberRecord(aAccountName, aPassword, aIsAdmin, aFirstName, aMiddelName, aLastName, aPhone, aPhoneType, aEmail, aStreetAddress, aCity, aState, aZipCode, theAccount, theMember, theAddress);
+        DataBaseMembers theUpdatedMember = Controller.findMember(account);
+        DataBaseAccountTable theUpdatedAccount = Controller.findAccount(theMember);
+        DataBaseAddress theUpdatedAddress = Controller.findAddress(theMember);
 
-        System.out.println(Control.printTheFullMemberDetails(theUpdatedMember, theUpdatedUser, theUpdatedAddress) + "\n\n");
+        System.out.println(Controller.printTheFullMemberDetails(theUpdatedMember, theUpdatedAccount, theUpdatedAddress) + "\n\n");
 
     }
 
-    private void VHideRecord() {
+    private void VHideAccount() {
 
         System.out.println("VHideRecord() - STUB Not supported yet.");
-//        INSERT INTO `DataBaseUserTable` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
+//        INSERT INTO `DataBaseAccountTable` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
 
 // Sends to different method that will be depreciated later
         VRemoveMemberRecord();
@@ -410,7 +406,7 @@ public class SkillsApp {
 // METHOD COMPLETE
         System.out.println("Member delete account stub, \nthis will not be part of the normal program\n");
 
-        VListAllUser();
+        VListAccount();
 
         System.out.println("\nPlease select a account to Remove from the list,\nor 0 to return to main menu:");
 
@@ -423,19 +419,19 @@ public class SkillsApp {
             return;
         }
 
-        Control.exit(account);
+        Controller.exit(account);
 
         System.out.println("Please confirm remove account (Y/N)\nCaution: This can not be undone!");
 
         String YESorNO = accountInput.nextLine();
 
-        System.out.println("\n" + Control.deleteMemberRecords(account, YESorNO) + "\n");
+        System.out.println("\n" + Controller.deleteMemberRecords(account, YESorNO) + "\n");
 
     }
 
-    private void VaddSkillToUser() {
+    private void VAddSkillToAccount() {
 
-        System.out.println("VaddSkillToUser() - STUB Not supported yet.");
+        System.out.println("VAddSkillToAccount() - STUB Not supported yet.");
         System.out.println("This STUB Will utilize JSON");
     }
 
@@ -485,23 +481,23 @@ public class SkillsApp {
             switch (choice) {
 
                 case 1:
-                    VcreatUser();
+                    VcreateAccount();
                     break;
 
                 case 2:
-                    VlistUser();
+                    VlistAccount();
                     break;
 
                 case 3:
-                    VlistSearchedUser();
+                    VlistSearchedAccount();
                     break;
 
                 case 4:
-                    VupdateUser();
+                    VupdateAccount();
                     break;
 
                 case 5:
-                    VdeleteUser();
+                    VdeleteAccount();
                     break;
 
                 case 6:
@@ -522,34 +518,34 @@ public class SkillsApp {
 
     }
 
-    private void VcreatUser() {
+    private void VcreateAccount() {
         Integer account = null;
         System.out.println();
         System.out.println("Please Enter the following");
 
-        String aUserName = VsystemInputUserName(account);
+        String aAccountName = VsystemInputAccountName(account);
         String aCreatedBy = VsystemInputCreatedBy(account);
 
-        Control.creatUser(aUserName, aCreatedBy);
+        Controller.creatAccount(aAccountName, aCreatedBy);
         System.out.println();
 
     }
 
-    private void VlistUser() {
-        UsersCurrentlyInDatabase();
-        Iterator<DB_user> iteratedUsers = Control.listUser().iterator();
-        while (iteratedUsers.hasNext()) {
-            DB_user account = iteratedUsers.next();
+    private void VlistAccount() {
+        AccountsCurrentlyInDB();
+        Iterator<DataBaseAccount> iteratedAccounts = Controller.listAccount().iterator();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseAccount account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s%-20s\n", account.getUserId(), account.getUsername(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
 
-    private void VlistSearchedUser() {
+    private void VlistSearchedAccount() {
         System.out.println("");
         System.out.println("Please enter the name of a account to search for, or Enter to return to main menu:");
-        String searchedUser = null;
+        String searchedAccount = null;
         try {
-            searchedUser = accountInput.nextLine();
+            searchedAccount = accountInput.nextLine();
         } catch (NumberFormatException e) {
             System.out.println();
             System.out.println("Invalid Entry, please select a valid option.");
@@ -558,20 +554,20 @@ public class SkillsApp {
         }
 
         //NEED to ADD AN ESCAPE PATH
-        //Control.exit(Integer.parseInt(searchedUser));
-        UsersCurrentlyInDatabase();
-        Iterator<DB_user> iteratedUsers = Control.listSearchedUser(searchedUser).iterator();
-        while (iteratedUsers.hasNext()) {
-            DB_user account = iteratedUsers.next();
+        //Controller.exit(Integer.parseInt(searchedAccount));
+        AccountsCurrentlyInDB();
+        Iterator<DataBaseAccount> iteratedAccounts = Controller.listSearchedAccount(searchedAccount).iterator();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseAccount account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s%-20s\n", account.getUserId(), account.getUsername(), account.getCreatedBy(), account.getCreatedDate());
         }
     }
 
-    private void VupdateUser() {
-        String aUserName = null;
+    private void VupdateAccount() {
+        String aAccountName = null;
         String aCreatedBy = null;
 
-        VlistUser();
+        VlistAccount();
 
         System.out.println("");
         System.out.println("Please select a account to update from the list, or 0 to return to main menu:");
@@ -585,36 +581,36 @@ public class SkillsApp {
             return;
         }
 
-        Control.exit(account);
-        DB_user updateUser = Control.updateUser(account);
+        Controller.exit(account);
+        DataBaseAccount updateAccount = Controller.updateAccount(account);
 
         System.out.println("");
-        System.out.println("Updating account: " + updateUser.getUsername());
+        System.out.println("Updating account: " + updateAccount.getUsername());
         System.out.println("");
         System.out.println("Enter the corrected Information or press enter to keep the current Information just press Enter....");
 
-        aUserName = VsystemInputUserName(account);
+        aAccountName = VsystemInputAccountName(account);
         aCreatedBy = VsystemInputCreatedBy(account);
 
-        Control.updateTheUser(account, aUserName, aCreatedBy);
+        Controller.updateTheAccount(account, aAccountName, aCreatedBy);
 
         System.out.println();
-        updateUser = Control.updateUser(account);
+        updateAccount = Controller.updateAccount(account);
 
         // added the new account lised here
         System.out.println("Updated account information:");
-        System.out.println("account:       " + updateUser.getUsername());
-        System.out.println("CREATED_BY: " + updateUser.getCreatedBy());
+        System.out.println("account:       " + updateAccount.getUsername());
+        System.out.println("CREATED_BY: " + updateAccount.getCreatedBy());
 
         System.out.println();
         System.out.println();
 
     }
 
-    private void VdeleteUser() {
+    private void VdeleteAccount() {
 
         System.out.println("delete account stub");
-        VlistUser();
+        VlistAccount();
 
         System.out.println("");
         System.out.println("Please select a account to Remove from the list, ");
@@ -629,7 +625,7 @@ public class SkillsApp {
             return;
         }
 
-        Control.exit(account);
+        Controller.exit(account);
 
         System.out.println("Please confirm remove account (Y/N)");
         System.out.println("Caution: This can not be undone!");
@@ -637,24 +633,24 @@ public class SkillsApp {
         String YESorNO = accountInput.nextLine();
 
         System.out.println("");
-        System.out.println(Control.deleteUser(account, YESorNO));
+        System.out.println(Controller.deleteAccount(account, YESorNO));
         System.out.println("");
     }
 
-    private String VsystemInputUserName(Integer account) {
-        System.out.print("account Name:       " + Control.ckUser(account) + "   ");
-        String aUserName = Control.ckForUser(account, accountInput.nextLine());
-        return aUserName;
+    private String VsystemInputAccountName(Integer account) {
+        System.out.print("account Name:       " + Controller.ckUser(account) + "   ");
+        String aAccountName = Controller.ckForAccount(account, accountInput.nextLine());
+        return aAccountName;
     }
 
     private String VsystemInputCreatedBy(Integer account) {
-        System.out.print("account CREATED_BY: " + Control.ckCreatedBy(account) + "   ");
-        String aCreatedBy = Control.ckForCreatedBy(account, accountInput.nextLine());
+        System.out.print("account CREATED_BY: " + Controller.ckCreatedBy(account) + "   ");
+        String aCreatedBy = Controller.ckForCreatedBy(account, accountInput.nextLine());
         return aCreatedBy;
     }
 
-    private void UsersCurrentlyInDatabase() {
-        System.out.println("Users currently in Database");
+    private void AccountsCurrentlyInDB() {
+        System.out.println("Accounts currently in Database");
         System.out.printf("%-10s%-20s%-20s%-20s\n", "user_id", "username", "created_by", "created_date");
         System.out.printf("%-10s%-20s%-20s%-20s\n", "+++++++", "++++++++", "++++++++++", "++++++++++++");
         System.out.println();
@@ -662,17 +658,17 @@ public class SkillsApp {
 
 // THIS IS TESTING AREA
     private boolean DBTESTlistUser() {
-        UsersCurrentlyInDatabase();
-        Iterator<DataBaseUserTable> iteratedUsers = Control.DBTESTlistUser().iterator();
-        while (iteratedUsers.hasNext()) {
-            DataBaseUserTable account = iteratedUsers.next();
+        AccountsCurrentlyInDB();
+        Iterator<DataBaseAccountTable> iteratedAccounts = Controller.DBTESTlistUser().iterator();
+        while (iteratedAccounts.hasNext()) {
+            DataBaseAccountTable account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s\n", account.getUserName(), account.getPassword(), account.getAdminUser());
         }
 
         return true;
     }
 
-    private boolean userMainMenu() {
+    private boolean accountMainMenu() {
         boolean stopUsing = false;
 
         while (!stopUsing) {
@@ -699,30 +695,22 @@ public class SkillsApp {
             }
 
             switch (choice) {
-
                 case 1:
-                    VlistUser();
+                    VlistAccount();
                     break;
-
                 case 2:
-                    VlistSearchedUser();
+                    VlistSearchedAccount();
                     break;
-
                 case 3:
                     stopUsing = true;
                     break;
-
                 default:
                     System.out.println();
                     System.out.println("Invalid Entry, please select a valid option.");
                     System.out.println();
                     break;
-
             }
-
         }
-
         return stopUsing;
         }
-
     }

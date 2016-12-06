@@ -12,8 +12,8 @@ import javax.persistence.*;
  *
  * @author Hodes
  */
-public class DataBaseAddress {
-    @Entity
+
+@Entity
 @Table(name = "DB_address_table")
 public class DataBaseAddress implements Serializable {
 
@@ -34,7 +34,7 @@ public class DataBaseAddress implements Serializable {
      private String zipCode;    
     
     @OneToMany(mappedBy="addressTableMapping")
-    private Set<DB_member_table> addresses;
+    private Set<DataBaseMembers> addresses;
     
     
     
@@ -121,14 +121,14 @@ public class DataBaseAddress implements Serializable {
     /**
      * @return the addresses
      */
-    public Set<DB_member_table> getAddresses() {
+    public Set<DataBaseMembers> getAddresses() {
         return addresses;
     }
 
     /**
      * @param addresses the addresses to set
      */
-    public void setAddresses(Set<DB_member_table> addresses) {
+    public void setAddresses(Set<DataBaseMembers> addresses) {
         this.addresses = addresses;
     }
 }

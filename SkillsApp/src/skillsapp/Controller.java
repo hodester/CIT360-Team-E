@@ -22,9 +22,9 @@ public class Controller {
             String aState, String aZipCode) {
 // Skills Resource Assistant ~ method        
 
-        DataBaseUserTable account = new DataBaseUserTable();
-        DB_member_table member = new DB_member_table();
-        DB_address_table address = new DB_address_table();
+        DataBaseAccountTable account = new DataBaseAccountTable();
+        DataBaseMembers member = new DataBaseMembers();
+        DataBaseAddress address = new DataBaseAddress();
         int newMemberID = newMemNumber();
         
         aPhone = aPhone.replaceAll("[-+.^:,_]","");
@@ -67,7 +67,7 @@ public class Controller {
     static Integer newMemNumber (){
 // Skills Resource Assistant ~ method
 // this works
-        List<DB_address_table> query = Model.newMemberNumber();
+        List<DataBaseAddress> query = Model.newMemberNumber();
         int result = Integer.parseInt(query.toString().replace("[", "").replace("]",""))+1;
 //        System.out.println("results - "+result);
         return result;
@@ -75,19 +75,19 @@ public class Controller {
 
     
     
-    static List<DB_member_table> listMemberTable() {
+    static List<DataBaseMembers> listMemberTable() {
 // Skills Resource Assistant ~ method        
-         List<DB_member_table> accountList = Model.showAllDBMemberTable();
+         List<DataBaseMembers> accountList = Model.showAllDBMemberTable();
          return accountList;
     }
 
-    static List<DB_member_table> listSearchedMemberTable(String account) {
+    static List<DataBaseMembers> listSearchedMemberTable(String account) {
 // Skills Resource Assistant ~ method        
-         List<DB_member_table> accountList = Model.showMemberTableListByUniqueSearch(account);
+         List<DataBaseMembers> accountList = Model.showMemberTableListByUniqueSearch(account);
          return accountList;
     }
 
-    static boolean ckIsActive(DataBaseUserTable theAccount) {
+    static boolean ckIsActive(DataBaseAccountTable theAccount) {
 // Skills Resource Assistant ~ method        
         if (theAccount != null){
         Integer active = theAccount.getIsActive();
@@ -110,36 +110,36 @@ public class Controller {
             }
     }
 
-    static List<DB_member_table> listIsActiveMemberTable() {
+    static List<DataBaseMembers> listIsActiveMemberTable() {
 // Skills Resource Assistant ~ method        
-         List<DB_member_table> accountList = Model.showAllActiveDBMemberTable();
+         List<DataBaseMembers> accountList = Model.showAllActiveDBMemberTable();
          return accountList;
     }
 
-    static DB_member_table findMember(Integer account) {
+    static DataBaseMembers findMember(Integer account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
          } else{
-             DB_member_table theAccount = Model.showMemberByID(account);
+             DataBaseMembers theAccount = Model.showMemberByID(account);
              return theAccount;
          }
     }
 
-    static DataBaseUserTable findAccount(DB_member_table theMember) {
+    static DataBaseAccountTable findAccount(DataBaseMembers theMember) {
 // Skills Resource Assistant ~ method        
-        DataBaseUserTable account = Model.accountByMemberNumber(theMember);
+        DataBaseAccountTable account = Model.accountByMemberNumber(theMember);
         return account;
     }
 
-    static DB_address_table findAddress(DB_member_table theMember) {
+    static DataBaseAddress findAddress(DataBaseMembers theMember) {
 // Skills Resource Assistant ~ method        
-        DB_address_table address;
+        DataBaseAddress address;
         address = Model.AddressByMemberNumber(theMember.getAddressTableMapping());
         return address;
     }
 
-    static String ckForAccountName(DataBaseUserTable account) {
+    static String ckForAccountName(DataBaseAccountTable account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -148,7 +148,7 @@ public class Controller {
          }
     }
 
-    static String ckForPassword(DataBaseUserTable account) {
+    static String ckForPassword(DataBaseAccountTable account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -157,7 +157,7 @@ public class Controller {
          }
     }
 
-    static String ckForAdmin(DataBaseUserTable account) {
+    static String ckForAdmin(DataBaseAccountTable account) {
 // Skills Resource Assistant ~ method        
          switch (account.getAdminAccount()){
              case 0:
@@ -169,7 +169,7 @@ public class Controller {
          }
     }
 
-    static String ckForFirstName(DB_member_table account) {
+    static String ckForFirstName(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -178,7 +178,7 @@ public class Controller {
          }
     }
 
-    static String ckForMiddleName(DB_member_table account) {
+    static String ckForMiddleName(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -187,7 +187,7 @@ public class Controller {
          }
     }
 
-    static String ckForLastName(DB_member_table account) {
+    static String ckForLastName(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -196,7 +196,7 @@ public class Controller {
          }
     }
 
-    static String ckForPhone(DB_member_table account) {
+    static String ckForPhone(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -205,7 +205,7 @@ public class Controller {
          }
     }
 
-    static String ckForPhoneType(DB_member_table account) {
+    static String ckForPhoneType(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          switch (account.getPhoneType()){
              case 1:
@@ -220,7 +220,7 @@ public class Controller {
          
     }
 
-    static String ckForEmail(DB_member_table account) {
+    static String ckForEmail(DataBaseMembers account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -229,7 +229,7 @@ public class Controller {
          }
     }
 
-    static String ckForStreetAdress(DB_address_table account) {
+    static String ckForStreetAdress(DataBaseAddress account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -238,7 +238,7 @@ public class Controller {
          }
     }
 
-    static String ckForCity(DB_address_table account) {
+    static String ckForCity(DataBaseAddress account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -247,7 +247,7 @@ public class Controller {
          }
     }
 
-    static String ckForState(DB_address_table account) {
+    static String ckForState(DataBaseAddress account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -256,7 +256,7 @@ public class Controller {
          }
     }
 
-    static String ckForZipCode(DB_address_table account) {
+    static String ckForZipCode(DataBaseAddress account) {
 // Skills Resource Assistant ~ method        
          if("".equals(account)){
              return null;
@@ -265,10 +265,10 @@ public class Controller {
          }
     }
 
-    static Integer updateMemberRecord(String aAccountName, String aPassword, String aIsAdmin, String aFirstName, String aMiddelName, String aLastName, String aPhone, Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, String aState, String aZipCode, DataBaseUserTable theOldUser, DB_member_table theOldMember, DB_address_table theOldAddress) {
-        DataBaseUserTable theAccount = theOldAccount;
-        DB_member_table theMember = theOldMember;
-        DB_address_table theAddress = theOldAddress;
+    static Integer updateMemberRecord(String aAccountName, String aPassword, String aIsAdmin, String aFirstName, String aMiddelName, String aLastName, String aPhone, Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, String aState, String aZipCode, DataBaseAccountTable theOldAccount, DataBaseMembers theOldMember, DataBaseAddress theOldAddress) {
+        DataBaseAccountTable theAccount = theOldAccount;
+        DataBaseMembers theMember = theOldMember;
+        DataBaseAddress theAddress = theOldAddress;
         
          if (!aAccountName.isEmpty()){
              theAccount.setAccountName(aAccountName);
@@ -315,14 +315,14 @@ public class Controller {
              theAddress.setZipCode(aZipCode);
          }
          
-         Model.updatetheAccount(theAccount);
+         Model.updateTheAccount(theAccount);
          Model.updateTheMember(theMember);
          Model.updateTheAddress(theAddress);
          
          return theMember.getMemberID();
     }
 
-    static String printTheFullMemberDetails(DB_member_table theUpdatedMember, DataBaseUserTable theUpdatedUser, DB_address_table theUpdatedAddress) {
+    static String printTheFullMemberDetails(DataBaseMembers theUpdatedMember, DataBaseAccountTable theUpdatedAccount, DataBaseAddress theUpdatedAddress) {
          return "\nUpdated account information:\n" +
                  "\nAccount:           " + theUpdatedAccount.getAccountName() + 
                  "\npassword:       " + theUpdatedAccount.getPassword() + 
@@ -339,7 +339,7 @@ public class Controller {
 
     static String deleteMemberRecords(Integer account, String YESorNO) {
          if (YESorNO.equalsIgnoreCase("Y")){
-             DB_member_table aMember = Model.showMemberByID(account);
+             DataBaseMembers aMember = Model.showMemberByID(account);
              Model.deletMembersRecord(aMember);
              return "account Removed!";
          } else {
@@ -351,16 +351,16 @@ public class Controller {
     
 //    public static void main(String[] args) {}
 
-    static DataBaseUserTable accountLogin(String username, String password) {
+    static DataBaseAccountTable accountLogin(String username, String password) {
 // Skills Resource Assistant ~ method        
-        DataBaseUserTable account = Model.showAccountByUniqueSearch(username, password);
+        DataBaseAccountTable account = Model.showAccountByUniqueSearch(username, password);
         if (account != null){
             return account;
         }
         return account;
     }
 
-    static boolean ckAdmin(DataBaseUserTable theAccount) {
+    static boolean ckAdmin(DataBaseAccountTable theAccount) {
 // Skills Resource Assistant ~ method        
         if (theAccount != null){
         Integer admin = theAccount.getAdminAccount();
@@ -375,7 +375,7 @@ public class Controller {
 
     static void creatAccount(String aAccountName, String aCreatedBy) {
         
-             DB_account person = new DB_account();
+             DataBaseAccount person = new DataBaseAccount();
              person.setAccountName(aAccountName);
              person.setCreatedBy(aCreatedBy);
              person.setCreatedDate(new Date());
@@ -383,17 +383,17 @@ public class Controller {
              Model.insertAccount(person);
     }
     
-    static DB_account updateAccount(Integer account){
+    static DataBaseAccount updateAccount(Integer account){
          if("".equals(account)){
              return null;
          } else{
-             DB_account theAccount = Model.showAccountByID(account);
+             DataBaseAccount theAccount = Model.showAccountByID(account);
              return theAccount;
          }
     }
     
-    static DB_account updatetheAccount(Integer account, String name, String by){
-         DB_account person = new DB_account();
+    static DataBaseAccount updatetheAccount(Integer account, String name, String by){
+         DataBaseAccount person = new DataBaseAccount();
          person.setAccountId(account);
          person.setAccountName(name);
          person.setCreatedBy(by);
@@ -403,13 +403,13 @@ public class Controller {
          return person;
     }
     
-    static List<DB_account> listAccount(){
-         List<DB_account> accountList = Model.showAllAccount();
+    static List<DataBaseAccount> listAccount(){
+         List<DataBaseAccount> accountList = Model.showAllAccount();
          return accountList;
     }
     
-    static List<DB_account> listSearchedAccount(String account){
-         List<DB_account> accountList = Model.showAccountListByUniqueSearch(account);
+    static List<DataBaseAccount> listSearchedAccount(String account){
+         List<DataBaseAccount> accountList = Model.showAccountListByUniqueSearch(account);
          return accountList;
     }
 
@@ -445,7 +445,7 @@ public class Controller {
     
     static void exit(Integer account){
          if(account == 0){
-             View.main(null);
+             SkillsApp.main(null);
         }
     }
     
@@ -466,12 +466,12 @@ public class Controller {
     }
 
     static String theAccount(Integer account){
-         DB_account theAccount = Model.showUserByID(account);
-         return theAccount.getAccountname();
+         DataBaseAccount theAccount = Model.showAccountByID(account);
+         return theAccount.getAccountName();
     }
     
     static String theCreatedBy(Integer account){
-         DB_account theAccount = Model.showAccountByID(account);
+         DataBaseAccount theAccount = Model.showAccountByID(account);
          return theAccount.getCreatedBy();
     }
 
@@ -492,8 +492,8 @@ public class Controller {
 
 // THIS IS TESTING AREA
     
-    static List<DataBaseUserTable> DBTESTlistAccount(){
-         List<DataBaseUserTable> accountList = Model.showAllDBAccounts();
+    static List<DataBaseAccountTable> DBTESTlistAccount(){
+         List<DataBaseAccountTable> accountList = Model.showAllDBAccounts();
          return accountList;
     }
 }
