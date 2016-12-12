@@ -351,9 +351,9 @@ public class Controller {
     
 //    public static void main(String[] args) {}
 
-    static DataBaseAccountTable accountLogin(String accountName, String password) {
+    static DataBaseAccountTable accountLogin(String accountname, String password) {
 // Skills Resource Assistant ~ method        
-        DataBaseAccountTable account = Model.showAccountByUniqueSearch(accountName, password);
+        DataBaseAccountTable account = Model.showAccountByUniqueSearch(accountname, password);
         if (account != null){
             return account;
         }

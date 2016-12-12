@@ -35,14 +35,26 @@ public class SkillsApp {
         while (!stopUsing) {
             String accountname = null;
             String password = null;
-            Integer account = null;
+//            Integer account = null;
 
             System.out.println("Welcom to Skills application");
-            System.out.print("Please enter account name: ");
-
+            System.out.println("Please enter account name: ");
+            
+            System.out.print("User Name: ");
+            accountname = accountInput.nextLine();
+   
+            System.out.print("Password:  ");
+            password = accountInput.nextLine();
+            
             boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
-            boolean isMemberActive Controller.ckIsActive(Controller.accountLogin(accountname, password));
+            boolean isMemberActive = Controller.ckIsActive(Controller.accountLogin(accountname, password));
 
+            System.out.print("User Name: ");
+            accountname = accountInput.nextLine();
+   
+            System.out.print("Password:  ");
+            password = accountInput.nextLine();
+            
             isAdmin = Controller.ckIfActive(isAdmin, isMemberActive);
 
             while (isAdmin && !stopUsing) {
@@ -147,7 +159,7 @@ public class SkillsApp {
                     stopUsing = true;
                     break;
                 default:
-                    System.out.println("\n\nInvalid Entry, please select a valid option.");
+                    System.out.println("\n\nInvalid Entry, please select another option.");
             }
         }
         return stopUsing;
@@ -267,10 +279,10 @@ public class SkillsApp {
     private void VCreatAccount() {
 
 // METHOD working - See STUB statment for more info
-        System.out.println("VCreateRecord() - STUB Needs final touches.");
-        System.out.println("Add check for account name in DB before accepting.");
-        System.out.println("Add check that phone num is 10 digits");
-        System.out.println("Add check that email address is valid format");
+        System.out.println("VCreateRecord()");
+        System.out.println("Check for account name in DataBase before accepting.");
+        System.out.println("Check that phone num is 10 digits");
+        System.out.println("Check that email address is valid format");
 
         System.out.println("\nTo create a new record\nPlease Enter the following:\n");
 
@@ -296,8 +308,6 @@ public class SkillsApp {
     }
 
     private void VListAccount() {
-// Skills Resource Assistant ~ method
-// METHOD COMPLETE
         Iterator<DataBaseMembers> iteratedAccounts = Controller.listMemberTable().iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
@@ -308,8 +318,6 @@ public class SkillsApp {
     }
 
     private void VListAccountByName() {
-
-// METHOD working - needs an escape path
         System.out.println("\nPlease enter the name of a account to search for, \nor Enter to return to main menu:");
         String searchedAccount = null;
         try {
@@ -319,8 +327,6 @@ public class SkillsApp {
             return;
         }
 
-        //NEED to ADD AN ESCAPE PATH
-        //Controller.exit(Integer.parseInt(searchedAccount));
         Iterator<DataBaseMembers> iteratedAccounts = Controller.listSearchedMemberTable(searchedAccount).iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
@@ -331,8 +337,6 @@ public class SkillsApp {
     }
 
     private void VListAccountByInActive() {
-
-// METHOD COMPLETE
         Iterator<DataBaseMembers> iteratedAccounts = Controller.listIsActiveMemberTable().iterator();
         System.out.printf("%-10s%-20s%-20s\n", "ID", "First Name", "Last Name");
         System.out.printf("%-10s%-20s%-20s\n", "--", "----------", "---------");
@@ -340,13 +344,9 @@ public class SkillsApp {
             DataBaseMembers account = iteratedAccounts.next();
             System.out.printf("%-10s%-20s%-20s\n", account.getMemberID(), account.getFName(), account.getLName());
         }
-
     }
 
     private void VEditAccount() {
-// Skills Resource Assistant ~ method
-// FUTURE UPDATE - Call a new menu to list all account or search by account name
-
         VListAccount();
 
         System.out.println("\nPlease select a account to update from the list, or 0 to return to main menu:\n");
@@ -357,7 +357,6 @@ public class SkillsApp {
             System.out.println("\n\nInvalid Entry, please select a valid option.");
             return;
         }
-
         Controller.exit(account);
 
         DataBaseMembers theMember = Controller.findMember(account);
@@ -387,21 +386,15 @@ public class SkillsApp {
         DataBaseAddress theUpdatedAddress = Controller.findAddress(theMember);
 
         System.out.println(Controller.printTheFullMemberDetails(theUpdatedMember, theUpdatedAccount, theUpdatedAddress) + "\n\n");
-
     }
 
     private void VHideAccount() {
 
         System.out.println("VHideRecord() - STUB Not supported yet.");
-//        INSERT INTO `DataBaseAccountTable` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
-
-// Sends to different method that will be depreciated later
         VRemoveMemberRecord();
     }
 
     private void VRemoveMemberRecord() {
-
-// METHOD COMPLETE
         System.out.println("Member delete account stub, \nthis will not be part of the normal program\n");
 
         VListAccount();
@@ -424,11 +417,9 @@ public class SkillsApp {
         String YESorNO = accountInput.nextLine();
 
         System.out.println("\n" + Controller.deleteMemberRecords(account, YESorNO) + "\n");
-
     }
 
     private void VAddSkillToAccount() {
-
         System.out.println("VAddSkillToAccount() - STUB Not supported yet.");
         System.out.println("This STUB Will utilize JSON");
     }
@@ -456,8 +447,6 @@ public class SkillsApp {
             System.out.println();
             System.out.println("Administrator Main Menu");
 
-            // FUTURE PLANNING: place while loop for main menu here
-            // and remove unneeded System.out.println()'s
             System.out.println(" 1 - Add account");
             System.out.println(" 2 - List All account's");
             System.out.println(" 3 - List account by name search");
@@ -507,13 +496,9 @@ public class SkillsApp {
                     System.out.println("Invalid Entry, please select a valid option.");
                     System.out.println();
                     break;
-
             }
-
         }
-
         return stopUsing;
-
     }
 
     private void VcreateAccount() {
@@ -526,7 +511,6 @@ public class SkillsApp {
 
         Controller.creatAccount(aAccountName, aCreatedBy);
         System.out.println();
-
     }
 
     private void VlistAccount() {
@@ -551,8 +535,6 @@ public class SkillsApp {
             return;
         }
 
-        //NEED to ADD AN ESCAPE PATH
-        //Controller.exit(Integer.parseInt(searchedAccount));
         AccountsCurrentlyInDB();
         Iterator<DataBaseAccount> iteratedAccounts = Controller.listSearchedAccount(searchedAccount).iterator();
         while (iteratedAccounts.hasNext()) {
@@ -595,14 +577,12 @@ public class SkillsApp {
         System.out.println();
         updateAccount = Controller.updateAccount(account);
 
-        // added the new account lised here
         System.out.println("Updated account information:");
         System.out.println("account:       " + updateAccount.getAccountname());
         System.out.println("CREATED_BY: " + updateAccount.getCreatedBy());
 
         System.out.println();
         System.out.println();
-
     }
 
     private void VdeleteAccount() {
@@ -654,7 +634,6 @@ public class SkillsApp {
         System.out.println();
     }
 
-// THIS IS TESTING AREA
     private boolean DBTESTlistAccount() {
         AccountsCurrentlyInDB();
         Iterator<DataBaseAccountTable> iteratedAccounts = Controller.DBTESTlistAccount().iterator();
@@ -675,8 +654,6 @@ public class SkillsApp {
             System.out.println();
             System.out.println("Main Menu");
 
-            // FUTURE PLANNING: place while loop for main menu here
-            // and remove unneeded System.out.println()'s
             System.out.println(" 1 - List All account's");
             System.out.println(" 2 - List account by name search");
             System.out.println(" 3 - QUIT");
