@@ -5,8 +5,7 @@
  */
 package skillsapp;
 
-import java.io.Serializable;
-import javax.persistence.*;
+
 
 
 /**
