@@ -41,7 +41,7 @@ public class SkillsApp {
             System.out.print("Please enter account name: ");
 
             boolean isAdmin = Controller.ckAdmin(Controller.accountLogin(accountname, password));
-            boolean isMemberActive Controller.ckIsActive(Controller.accountLogin(accountname, password));
+            boolean isMemberActive = Controller.ckIsActive(Controller.accountLogin(accountname, password));
 
             isAdmin = Controller.ckIfActive(isAdmin, isMemberActive);
 
