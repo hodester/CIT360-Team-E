@@ -67,7 +67,7 @@ public class Model{
     static List<DataBaseAccount> showAccountListByUniqueSearch(String account){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("from DataBaseAccount as u where u.username like :searchName");
+        Query accountDB = (Query) session.createQuery("from DataBaseAccount as u where u.account like :searchName");
         accountDB.setParameter("searchName", "%"+account+"%");
         @SuppressWarnings("unchecked")
         List<DataBaseAccount> accountList = accountDB.list();
@@ -81,7 +81,7 @@ public class Model{
     static DataBaseAccountTable showAccountByUniqueSearch(String account, String password){
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query accountDB = (Query) session.createQuery("Select u from DataBaseAccountTable as u where u.username = :username and u.password = :password");
+        Query accountDB = (Query) session.createQuery("Select u from DB_user_table as u where u.accountname = :username and u.password = :password");
         accountDB.setParameter("username", account);
         accountDB.setParameter("password", password);
         DataBaseAccountTable theAccount = (DataBaseAccountTable) accountDB.uniqueResult();
