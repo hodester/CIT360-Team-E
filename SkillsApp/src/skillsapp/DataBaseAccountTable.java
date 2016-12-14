@@ -17,9 +17,6 @@ import javax.persistence.Table;
 
 
 
-
-
-
 /**
  *
  * @author Hodes
@@ -32,7 +29,7 @@ public class DataBaseAccountTable implements Serializable{
     
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "userID")
-     private int userID;
+     private int accountID;
     
     @Column(name = "username")
      private String accountName;
@@ -55,8 +52,8 @@ public class DataBaseAccountTable implements Serializable{
     
 
 
-    public DataBaseAccountTable(Integer userID, String username, String password, Integer adminuser, DataBaseMembers id, Integer isActive){
-        this.userID = userID;
+    public DataBaseAccountTable(Integer accountID, String username, String password, Integer adminuser, DataBaseMembers id, Integer isActive){
+        this.accountID = accountID;
         this.accountName = username;
         this.password = password;
         this.adminAccount = adminuser;        
@@ -116,13 +113,15 @@ public class DataBaseAccountTable implements Serializable{
      * @return the AccountID
      */
     public int getAccountID() {
-        return userID;
+        return accountID;
     }
 
     /**
-     * @param AccountID the userID to set
+     * @param accountID
      */
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+//    public void setUserID(int userID) {
+//        this.userID = userID;
     }
 }
