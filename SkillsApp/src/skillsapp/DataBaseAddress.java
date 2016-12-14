@@ -5,6 +5,9 @@
  */
 package skillsapp;
 
+import java.io.Serializable;
+import java.util.Set;
+
 
 /**
  *

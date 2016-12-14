@@ -6,7 +6,6 @@
 package skillsapp;
 
 
-
 /**
  *
  * @author mhodes

@@ -5,6 +5,8 @@
  */
 package skillsapp;
 
+import javax.security.auth.login.Configuration;
+
 
 @SuppressWarnings("depreciation")
 

@@ -16,7 +16,6 @@ public class Model{
     /*
      * DataBaseAccount Database functions
      */
-
     static void insertAccount(DataBaseAccount account) {
         Session session = DataBaseSF.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
