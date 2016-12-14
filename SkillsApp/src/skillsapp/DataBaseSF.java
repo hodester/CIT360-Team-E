@@ -5,10 +5,11 @@
  */
 package skillsapp;
 
-import javax.imageio.spi.ServiceRegistry;
-import javax.security.auth.login.Configuration;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 
 
 @SuppressWarnings("depreciation")
@@ -22,7 +23,7 @@ public class DataBaseSF {
     private static final SessionFactory sessionFactory;
 
     static {
-        Configuration config = new Configuration();
+        Configuration config = new Configuration() {};
         config.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         config.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         config.setProperty("hibernate.connection.url", "jdbc:mysql://gabjames-org-mysql.gabjames.org:3306/cit360_team_e_skills_db");
