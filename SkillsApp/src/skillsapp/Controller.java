@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
 /**
  *
  * @author mhodes
@@ -68,7 +67,6 @@ public class Controller {
     
     static Integer newMemNumber (){
 // Skills Resource Assistant ~ method
-// this works
         List<DataBaseAddress> query = Model.newMemberNumber();
         int result = Integer.parseInt(query.toString().replace("[", "").replace("]",""))+1;
 //        System.out.println("results - "+result);

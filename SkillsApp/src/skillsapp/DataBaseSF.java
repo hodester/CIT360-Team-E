@@ -5,7 +5,10 @@
  */
 package skillsapp;
 
+import javax.imageio.spi.ServiceRegistry;
 import javax.security.auth.login.Configuration;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 
 @SuppressWarnings("depreciation")

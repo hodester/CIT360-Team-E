@@ -279,7 +279,6 @@ public class SkillsApp {
 
     private void VCreatAccount() {
 
-// METHOD working - See STUB statment for more info
         System.out.println("VCreateRecord()");
         System.out.println("Check for account name in DataBase before accepting.");
         System.out.println("Check that phone num is 10 digits");
